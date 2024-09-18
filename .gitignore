@@ -1,0 +1,14 @@
+node_modules*
+config.status*
+config/environments/*.js
+.idea
+.vscode
+.nvmrc
+tools/munin/windshaft.conf
+logs/
+pids/
+redis.pid
+*.log
+coverage/
+.DS_Store
+.nyc_output
