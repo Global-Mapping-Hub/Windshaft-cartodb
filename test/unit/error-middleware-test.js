@@ -62,17 +62,13 @@ describe('error-middleware', function () {
         };
 
         const errorFn = errorMiddleware();
-        errorFn(errors, req, res, (err) => {
-            if (err) {
-                return done(err);
-            }
+        errorFn(errors, req, res);
 
-            assert.deepStrictEqual(res.headers, {
-                'X-Tiler-Errors': JSON.stringify(errorHeader)
-            });
-
-            return done();
+        assert.deepStrictEqual(res.headers, {
+            'X-Tiler-Errors': JSON.stringify(errorHeader)
         });
+
+        done();
     });
 
     it('JSONP should return a header with error status code', function (done) {
@@ -118,17 +114,13 @@ describe('error-middleware', function () {
         };
 
         const errorFn = errorMiddleware();
-        errorFn(errors, req, res, (err) => {
-            if (err) {
-                return done(err);
-            }
+        errorFn(errors, req, res);
 
-            assert.deepStrictEqual(res.headers, {
-                'X-Tiler-Errors': JSON.stringify(errorHeader)
-            });
-
-            return done();
+        assert.deepStrictEqual(res.headers, {
+            'X-Tiler-Errors': JSON.stringify(errorHeader)
         });
+
+        done();
     });
 
     it('should escape chars that broke logs regex', function (done) {
@@ -175,16 +167,12 @@ describe('error-middleware', function () {
         };
 
         const errorFn = errorMiddleware();
-        errorFn(errors, req, res, (err) => {
-            if (err) {
-                return done(err);
-            }
+        errorFn(errors, req, res);
 
-            assert.deepStrictEqual(res.headers, {
-                'X-Tiler-Errors': JSON.stringify(errorHeader)
-            });
-
-            return done();
+        assert.deepStrictEqual(res.headers, {
+            'X-Tiler-Errors': JSON.stringify(errorHeader)
         });
+
+        done();
     });
 });

@@ -9,7 +9,7 @@ var serverOptions = require('../../lib/server-options');
 
 var RedisPool = require('redis-mpool');
 var TemplateMaps = require('../../lib/backends/template-maps');
-const mapnik = require('@carto/mapnik');
+var mapnik = require('windshaft').mapnik;
 
 var IMAGE_TOLERANCE = 20;
 

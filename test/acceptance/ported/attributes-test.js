@@ -42,8 +42,7 @@ describe('attributes', function () {
     function checkCORSHeaders (res) {
         assert.strictEqual(
             res.headers['access-control-allow-headers'],
-            'X-Requested-With, X-Prototype-Version, X-CSRF-Token, Authorization, ' +
-            'Carto-Event, Carto-Event-Source, Carto-Event-Group-Id'
+            'X-Requested-With, X-Prototype-Version, X-CSRF-Token, Authorization'
         );
         assert.strictEqual(res.headers['access-control-allow-origin'], '*');
     }

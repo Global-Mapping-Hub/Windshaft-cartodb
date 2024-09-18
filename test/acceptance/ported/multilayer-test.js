@@ -6,7 +6,7 @@ var assert = require('../../support/assert');
 var _ = require('underscore');
 var querystring = require('querystring');
 var step = require('step');
-const mapnik = require('@carto/mapnik');
+var mapnik = require('windshaft').mapnik;
 var cartodbServer = require('../../../lib/server');
 var ServerOptions = require('./support/ported-server-options');
 var LayergroupToken = require('../../../lib/models/layergroup-token');
@@ -27,8 +27,7 @@ describe('multilayer', function () {
     function checkCORSHeaders (res) {
         assert.strictEqual(
             res.headers['access-control-allow-headers'],
-            'X-Requested-With, X-Prototype-Version, X-CSRF-Token, Authorization, ' +
-            'Carto-Event, Carto-Event-Source, Carto-Event-Group-Id'
+            'X-Requested-With, X-Prototype-Version, X-CSRF-Token, Authorization'
         );
         assert.strictEqual(res.headers['access-control-allow-origin'], '*');
     }
@@ -1033,8 +1032,7 @@ describe('multilayer', function () {
     /// /////////////////////////////////////////////////////////////////
 
     it('geting options on layergroup should return CORS headers', function (done) {
-        const allowHeaders = 'X-Requested-With, X-Prototype-Version, X-CSRF-Token, Authorization, ' +
-                                'Carto-Event, Carto-Event-Source, Carto-Event-Group-Id, Content-Type';
+        const allowHeaders = 'X-Requested-With, X-Prototype-Version, X-CSRF-Token, Authorization, Content-Type';
         assert.response(server, {
             url: '/api/v1/map',
             method: 'OPTIONS'

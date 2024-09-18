@@ -302,6 +302,15 @@ describe('get requests with cache headers', function () {
             );
         });
 
+        it('/version', function (done) {
+            assert.response(
+                server,
+                getRequest('/version'),
+                statusOkResponse,
+                noCacheHeaders(done)
+            );
+        });
+
         it('/health', function (done) {
             assert.response(
                 server,

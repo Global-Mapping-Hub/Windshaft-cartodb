@@ -5,7 +5,7 @@ var RedisPool = require('redis-mpool');
 var querystring = require('querystring');
 
 var assert = require('../support/assert');
-const mapnik = require('@carto/mapnik');
+var mapnik = require('windshaft').mapnik;
 var CartodbWindshaft = require('../../lib/server');
 var serverOptions = require('../../lib/server-options');
 var TemplateMaps = require('../../lib/backends/template-maps');

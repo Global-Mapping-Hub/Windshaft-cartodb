@@ -30,8 +30,7 @@ describe('torque', function () {
     function checkCORSHeaders (res) {
         assert.strictEqual(
             res.headers['access-control-allow-headers'],
-            'X-Requested-With, X-Prototype-Version, X-CSRF-Token, Authorization, ' +
-            'Carto-Event, Carto-Event-Source, Carto-Event-Group-Id'
+            'X-Requested-With, X-Prototype-Version, X-CSRF-Token, Authorization'
         );
         assert.strictEqual(res.headers['access-control-allow-origin'], '*');
     }
@@ -69,7 +68,7 @@ describe('torque', function () {
                 assert.ok(parsed.errors, parsed);
                 var error = parsed.errors[0];
                 assert.strictEqual(error,
-                    "TorqueRenderer: Missing required property '-torque-frame-count' in torque layer CartoCSS");
+                    "Missing required property '-torque-frame-count' in torque layer CartoCSS");
                 return null;
             },
             function doPost2 (err) {
@@ -91,7 +90,7 @@ describe('torque', function () {
                 assert.ok(parsed.errors, parsed);
                 var error = parsed.errors[0];
                 assert.strictEqual(error,
-                    "TorqueRenderer: Missing required property '-torque-resolution' in torque layer CartoCSS");
+                    "Missing required property '-torque-resolution' in torque layer CartoCSS");
                 return null;
             },
             function doPost3 (err) {
@@ -113,7 +112,7 @@ describe('torque', function () {
                 assert.ok(parsed.errors, parsed);
                 var error = parsed.errors[0];
                 assert.strictEqual(error,
-                    "TorqueRenderer: Missing required property '-torque-aggregation-function' in torque layer CartoCSS");
+                    "Missing required property '-torque-aggregation-function' in torque layer CartoCSS");
                 return null;
             },
             function finish (err) {
@@ -447,7 +446,7 @@ describe('torque', function () {
                 assert.ok(parsed.errors, parsed);
                 var error = parsed.errors[0];
                 assert.strictEqual(error,
-                    "TorqueRenderer: Unexpected type for property '-torque-aggregation-function', expected string");
+                    "Unexpected type for property '-torque-aggregation-function', expected string");
                 done();
                 return null;
             }

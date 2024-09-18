@@ -6,7 +6,7 @@ var LayergroupToken = require('../../../lib/models/layergroup-token');
 var testHelper = require('../../support/test-helper');
 var CartodbWindshaft = require('../../../lib/server');
 var serverOptions = require('../../../lib/server-options');
-const mapnik = require('@carto/mapnik');
+var mapnik = require('windshaft').mapnik;
 var IMAGE_TOLERANCE_PER_MIL = 10;
 
 describe('turbo-carto for named maps', function () {

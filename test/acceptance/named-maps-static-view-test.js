@@ -5,7 +5,7 @@ var testHelper = require('../support/test-helper');
 var RedisPool = require('redis-mpool');
 
 var assert = require('../support/assert');
-const mapnik = require('@carto/mapnik');
+var mapnik = require('windshaft').mapnik;
 var CartodbWindshaft = require('../../lib/server');
 var serverOptions = require('../../lib/server-options');
 var TemplateMaps = require('../../lib/backends/template-maps');
