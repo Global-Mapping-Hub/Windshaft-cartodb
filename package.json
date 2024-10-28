@@ -43,7 +43,7 @@
     "cartodb-redis": "2.1.0",
     "debug": "3.1.0",
     "dot": "1.1.2",
-    "express": "4.16.3",
+    "express": "4.21.0",
     "fastly-purge": "1.0.1",
     "gc-stats": "1.2.1",
     "glob": "7.1.2",
