@@ -1,4 +1,4 @@
-# Windshaft-CartoDB [![Build Status](https://travis-ci.org/CartoDB/Windshaft-cartodb.svg?branch=master)](https://travis-ci.org/CartoDB/Windshaft-cartodb)
+# Windshaft-CartoDB
 
 The [`CARTO Maps API`](https://carto.com/developers/maps-api/) tiler. It extends [`Windshaft`](https://github.com/CartoDB/Windshaft) and exposes a web service with extra functionality:
 
