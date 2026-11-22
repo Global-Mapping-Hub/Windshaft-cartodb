@@ -78,8 +78,12 @@ https.globalAgent = new https.Agent(agentOptions);
 
 global.log4js = require('log4js');
 var log4jsConfig = {
-    appenders: [],
-    replaceConsole: true
+    appenders: {
+        app: { type: 'console' }
+    },
+    categories: {
+        default: { appenders: ['app'], level: 'info' }
+    }
 };
 
 if (global.environment.log_filename) {
@@ -90,13 +94,7 @@ if (global.environment.log_filename) {
         process.exit(1);
     }
     log('Logs will be written to ' + logFilename);
-    log4jsConfig.appenders.push(
-        { type: 'file', absolute: true, filename: logFilename }
-    );
-} else {
-    log4jsConfig.appenders.push(
-        { type: 'console', layout: { type: 'basic' } }
-    );
+    log4jsConfig.appenders.app = { type: 'file', filename: logFilename };
 }
 
 global.log4js.configure(log4jsConfig);
@@ -170,7 +168,7 @@ setInterval(function () {
 }, 5000);
 
 process.on('SIGHUP', function () {
-    global.log4js.clearAndShutdownAppenders(function () {
+    global.log4js.shutdown(function () {
         global.log4js.configure(log4jsConfig);
         global.logger = global.log4js.getLogger();
         log('Log files reloaded');
@@ -189,44 +187,23 @@ if (global.gc) {
     }
 }
 
-const gcStats = require('gc-stats')();
+const { PerformanceObserver, constants: perfConstants } = require('perf_hooks');
 
-gcStats.on('stats', function ({ pauseMS, gctype }) {
-    global.statsClient.timing('windshaft.gc', pauseMS);
-    global.statsClient.timing(`windshaft.gctype.${getGCTypeValue(gctype)}`, pauseMS);
+const gcKindNames = {};
+gcKindNames[perfConstants.NODE_PERFORMANCE_GC_MINOR] = 'Scavenge';
+gcKindNames[perfConstants.NODE_PERFORMANCE_GC_MAJOR] = 'MarkSweepCompact';
+gcKindNames[perfConstants.NODE_PERFORMANCE_GC_INCREMENTAL] = 'IncrementalMarking';
+gcKindNames[perfConstants.NODE_PERFORMANCE_GC_WEAKCB] = 'ProcessWeakCallbacks';
+
+const gcObserver = new PerformanceObserver(function (list) {
+    list.getEntries().forEach(function (entry) {
+        var pauseMS = entry.duration;
+        var kind = (entry.detail && gcKindNames[entry.detail.kind]) || 'All';
+        global.statsClient.timing('windshaft.gc', pauseMS);
+        global.statsClient.timing('windshaft.gctype.' + kind, pauseMS);
+    });
 });
-
-function getGCTypeValue (type) {
-    // 1: Scavenge (minor GC)
-    // 2: Mark/Sweep/Compact (major GC)
-    // 4: Incremental marking
-    // 8: Weak/Phantom callback processing
-    // 15: All
-    let value;
-
-    switch (type) {
-    case 1:
-        value = 'Scavenge';
-        break;
-    case 2:
-        value = 'MarkSweepCompact';
-        break;
-    case 4:
-        value = 'IncrementalMarking';
-        break;
-    case 8:
-        value = 'ProcessWeakCallbacks';
-        break;
-    case 15:
-        value = 'All';
-        break;
-    default:
-        value = 'Unkown';
-        break;
-    }
-
-    return value;
-}
+gcObserver.observe({ entryTypes: ['gc'] });
 
 addHandlers(listener, global.logger, 45000);
 

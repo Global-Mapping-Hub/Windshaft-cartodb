@@ -35,32 +35,30 @@
   "main": "app.js",
   "dependencies": {
     "@carto/fqdn-sync": "0.2.2",
+    "@carto/mapnik": "file:packages/node-mapnik",
     "basic-auth": "2.0.0",
-    "body-parser": "1.18.3",
+    "body-parser": "^1.20.3",
     "camshaft": "^0.65.2",
     "cartodb-psql": "0.14.0",
     "cartodb-query-tables": "^0.7.0",
     "cartodb-redis": "2.1.0",
-    "debug": "3.1.0",
-    "dot": "1.1.2",
-    "express": "4.21.0",
+    "debug": "4.4.3",
+    "dot": "1.1.3",
+    "express": "^4.21.2",
     "fastly-purge": "1.0.1",
-    "gc-stats": "1.2.1",
-    "glob": "7.1.2",
-    "log4js": "github:cartodb/log4js-node#cdb",
-    "lru-cache": "4.1.3",
+    "log4js": "^6.9.1",
+    "lru-cache": "^11.2.1",
     "lzma": "2.3.2",
     "node-statsd": "0.1.1",
-    "on-headers": "1.0.1",
+    "on-headers": "1.1.0",
     "queue-async": "1.1.0",
     "redis-mpool": "0.7.0",
-    "request": "2.87.0",
-    "semver": "5.5.0",
+    "semver": "7.7.2",
     "step-profiler": "0.3.0",
     "turbo-carto": "0.21.2",
-    "underscore": "1.6.0",
+    "underscore": "1.13.8",
     "windshaft": "5.6.4",
-    "yargs": "11.1.0"
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
@@ -70,10 +68,11 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "mocha": "5.2.0",
-    "moment": "2.22.1",
+    "request": "^2.88.2",
+    "moment": "2.31.0",
     "nock": "9.2.6",
     "nyc": "^14.1.1",
-    "redis": "2.8.0",
+    "redis": "3.1.2",
     "step": "1.0.0",
     "strftime": "0.10.0"
   },
@@ -91,8 +90,37 @@
     "test:docker": "docker run -e \"NODEJS_VERSION=$NODE_VERSION\" -v `pwd`:/srv $DOCKER_IMAGE bash docker/scripts/test-setup.sh && docker ps --filter status=dead --filter status=exited -aq | xargs docker rm -v",
     "docker:bash": "docker run -it -v `pwd`:/srv $DOCKER_IMAGE bash"
   },
+  "overrides": {
+    "@carto/mapnik": "file:packages/node-mapnik",
+    "ajv": "6.15.0",
+    "brace-expansion": "1.1.21",
+    "canvas": "3.2.3",
+    "debug": "4.4.3",
+    "dot": "1.1.3",
+    "form-data": "2.5.6",
+    "ini": "1.3.8",
+    "minimatch": "3.1.5",
+    "minimist": "1.2.8",
+    "mkdirp": {
+      "minimist": "0.2.4"
+    },
+    "moment": "2.31.0",
+    "nan": "2.30.0",
+    "node-uuid": "1.4.8",
+    "optimist": {
+      "minimist": "0.2.4"
+    },
+    "pg": "8.23.1",
+    "qs": "6.17.1",
+    "redis": "3.1.2",
+    "semver": "7.7.2",
+    "tar": "7.5.23",
+    "tough-cookie": "4.1.4",
+    "underscore": "1.13.8",
+    "uuid": "11.1.1"
+  },
   "engines": {
-    "node": "^10.15.1",
-    "npm": "^6.4.1"
+    "node": "^26.13.1",
+    "npm": ">=11"
   }
 }
