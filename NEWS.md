@@ -1,5 +1,15 @@
 # Changelog
 
+## 9.0.0
+Released 2026-11-22
+
+Breaking changes:
+- Requires Node.js 26. `@carto/mapnik` is `3.6.2-carto.17`, compiled for that runtime. Stored CartoCSS still targets Mapnik 3.0.15; Mapnik 4 is not used.
+
+Announcements:
+- Named-map cache invalidation uses the current LRU cache `delete` method, so a privacy change no longer exits the process.
+- The unmaintained `request` client is replaced with the local callback shim.
+
 ## 8.1.1
 Released 2020-02-17
 
